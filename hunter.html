@@ -68,7 +68,100 @@
             <div><img  width=100 height=100 id="23" onclick="check(23)" src="grass.jpg"></div>
             </div>
         </div>
-     
+        
+        
+    <script>
+        let id='id';
+        let checkCount=0;
+        let penal=0;
+        let lastCheck=0;
+        let mouseLocation=13;
+        let catLocation=21;
+        let gameOver=false;
+        let ids=[ ];
+        for(let i=0;i<=23;i++){
+            ids[i]=id+i;
+            
+           // console.log(ids[i]);
+          
+        }
+        function check(position){
+            if(gameOver==true){
+
+            }
+            else{
+                if(position==mouseLocation){
+                    id=ids[position]
+                    document.getElementById(id).src="ms.jpg";
+                    gameOver=true;
+                    penal=penal-3;
+                    console.log("image is mouse "+position);
+                    console.log("penalty is "+penal);
+                    console.log("GameOver");
+                }
+                else if(position==catLocation){
+                    id=ids[position]
+                    document.getElementById(id).src="bg.jpg";
+                    gameOver=true;
+                    penal=penal+4;
+                    console.log("image is cat "+position);
+                    console.log("penalty is "+penal);
+                    console.log("GameOver");
+                }
+                else {
+                    id=ids[position]
+                    document.getElementById(id).src="gg.jpg";
+                    checkCount+=1;
+                    penal+=1;
+                    console.log("checkcount is "+checkCount);
+                    console.log("penalty is " +penal);
+                }
+                lastCheck=position;
+                console.log("lastCheck position is "+lastCheck);            
+            }          
+            bushes.innerHTML="Number of bushes checked is "+checkCount;
+            penalty.innerHTML="Penalty is "+penal;            
+        }
+        let row=0;
+        let row1=0;
+        let row2=0
+        let col1=0;
+        let col=0;
+        let col2=0;
+        function help()
+        {
+            console.log("hi")
+            let lastcol=lastCheck%6;
+            let lastrow=Math.floor(lastCheck/6);
+            let catcol=catLocation%6;
+            let catrow=Math.floor(catLocation/6);
+            let coldiff=Math.abs(lastcol-catcol);
+            let rowdiff=(Math.abs(lastrow-catrow));
+            let ratcol=mouseLocation%6;
+            let ratrow=Math.floor(mouseLocation/6);
+            let ratcoldiff=Math.abs(lastcol-ratcol);
+            let ratrowdiff=(Math.abs(lastrow-ratrow));
+            console.log(rowdiff,coldiff)
+            if(ratrowdiff<=1 && ratcoldiff<=1)
+            {
+                document.getElementById("help").innerHTML="squeek"
+                penal+=2;
+                penalty.innerHTML="Penalty is "+penal;
+            }
+            else if(rowdiff<=1 && coldiff<=1)
+            {
+                document.getElementById("help").innerHTML="Meow"
+                penal+=2;
+                penalty.innerHTML="Penalty is "+penal;
+            }
+            else{
+                document.getElementById("help").innerHTML="sorry, no help available"
+                penal+=2;
+                penalty.innerHTML="Penalty is "+penal;
+            }
+        }
+        
+        </script>
           
 
     </body>
